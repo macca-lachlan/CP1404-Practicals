@@ -19,4 +19,3 @@ sorted_keys.sort()
 
 for word in sorted_keys:
     print("{:{}} : {}".format(word, longest_word,  word_to_count[word]))
-
