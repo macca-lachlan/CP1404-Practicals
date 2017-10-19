@@ -18,12 +18,15 @@ def main():
     # make a new directory
     # os.mkdir('temp')
 
-    # loop through each file in the (original) directory
-    for filename in os.listdir('.'):
-        # ignore directories, just process files
-        if not os.path.isdir(filename):
-            new_name = get_fixed_filename(filename)
-            print(new_name)
+    os.chdir('..')  # .. means "up" one directory
+    for dir_name, subdir_list, file_list in os.walk('.'):
+        for filename in file_list:
+            # ignore directories, just process files
+            if not os.path.isdir(filename):
+                new_name = get_fixed_filename(filename)
+                print(new_name)
+                # os.rename(filename, new_name)
+
 
             # NOTE: These options won't just work...
             # they show you ways of renaming and moving files,
@@ -53,6 +56,16 @@ def get_fixed_filename(filename):
     filename = filename.replace(" ", "_").replace(".TXT", ".txt")
 
     new_name = ""
+    old_char = ""
+    for char in filename:
+        if (old_char.islower() and char.isupper()) or (old_char.isupper() and char.isupper()):
+            new_name += "_"
+
+        if old_char == "_" and char.islower():
+            char = char.upper()
+        old_char = char
+        new_name += char
+
     # TODO: step-by-step, consider the problem cases and solve them
 
     return new_name
