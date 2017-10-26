@@ -10,7 +10,7 @@ def do_it(n):
         return 0
     return n % 2 + do_it(n - 1)
 
-
+print('test do_it')
 print(do_it(5))
 
 
@@ -20,7 +20,7 @@ def do_something(n):
         print(n ** 2)
         do_something(n - 1)
 
-
+print('test do_something')
 do_something(4)
 
 
@@ -29,5 +29,6 @@ def calculate_blocks(rows):
         return 0
     return rows + calculate_blocks(rows - 1)
 
-print(calculate_blocks(2))
+print('test calculate blocks')
+print(calculate_blocks(5))
 
