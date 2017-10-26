@@ -9,7 +9,10 @@ from prac_07.car import Car
 
 def repeat_string(s, n):
     """Repeat string s, n times, with spaces in between."""
-    return s * n
+    if n == 1:
+        return s
+    else:
+        return " ".join([s, s])
 
 
 def is_long_word(word, length=5):
@@ -22,7 +25,7 @@ def is_long_word(word, length=5):
     >>> is_long_word("Python", 6)
     True
     """
-    return len(word) > length
+    return len(word) >= length
 
 
 def run_tests():
@@ -40,18 +43,20 @@ def run_tests():
     # this should pass (no output)
     test_car = Car()
     assert test_car.odometer == 0, "Car does not set odometer correctly"
+    assert test_car.fuel == 0
 
     # TODO: 2. write assert statements to show if Car sets the fuel correctly
     # Note that Car's __init__ function sets the fuel in one of two ways:
     # using the value passed in or the default
     # You should test both of these
     test_car = Car(fuel=10)
+    assert test_car.fuel == 10
 
 
 run_tests()
 
 # TODO: 3. Uncomment the following line and run the doctests
-# doctest.testmod()
+doctest.testmod()
 
 # TODO: 4. Fix the failing is_long_word function
 # (don't change the tests, but the function!)
@@ -64,3 +69,24 @@ run_tests()
 # 'It is an ex parrot.' -> 'It is an ex parrot.'
 # and one more you decide (that's valid!)
 # then write the body of the function so that the tests pass
+
+
+def format_to_sentence(phrase):
+    senetence = ""
+    is_first_char = True
+    for char in phrase:
+        if is_first_char:
+            senetence += char.upper()
+            is_first_char = False
+        else:
+            senetence += char
+    if senetence[len(senetence) - 1] != '.':
+        senetence += '.'
+    return senetence
+
+assert format_to_sentence('hello') == 'Hello.'
+assert format_to_sentence('It is an ex parrot.') == 'It is an ex parrot.'
+assert format_to_sentence('this is not a sentence.')
+
+
+
